@@ -32,6 +32,7 @@ $heroes = $heroRepository->getAllHeroesWithPositiveHealth();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
+    <script defer src="assets/script.js"></script>
     <title>Créer un Héros</title>
 </head>
 <body>
@@ -48,7 +49,7 @@ $heroes = $heroRepository->getAllHeroesWithPositiveHealth();
     <?php foreach ($heroes as $hero): ?>
         <div class="hero-card">
            
-            <!-- <img src="" alt="Hero Image" class="hero-image" data-hero-id=""> -->
+        <img src="" alt="Hero Image" class="hero-image" style="width: 100px;" data-hero-id="<?= $hero->getId() ?>">
 
             <div class="hero-info">
                 <h2><?= htmlspecialchars($hero->getName()) ?></h2>
@@ -57,7 +58,8 @@ $heroes = $heroRepository->getAllHeroesWithPositiveHealth();
             </div>
             <!-- Formulaire pour choisir ce héros pour le combat -->
             <form method="POST" action="fight.php">
-                <input type="hidden" name="hero_id" value="<?= $hero->getId() ?>">  
+                <input type="hidden" name="hero_id" value="<?= $hero->getId() ?>"> 
+                <input type="hidden" name="hero_image" class="hero-image-src" value=""> 
                 <button type="submit" name="select_hero" value="1">Choisir ce Héros</button>
             </form>
         </div>

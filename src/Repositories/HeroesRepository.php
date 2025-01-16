@@ -44,4 +44,25 @@ final class HeroesRepository extends AbstractRepository
     return $heroes;
 }
 
+
+
+public function getAllHeroeById(int $heroId): array
+{
+   
+    $sql = "SELECT * FROM hero WHERE id = :id";
+    
+   
+    $stmt = $this->pdo->prepare($sql);
+    
+ 
+    $stmt->execute(['id' => $heroId]);
+    
+
+    $hero = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   
+
+    return $hero;
+}
+
+
 }
