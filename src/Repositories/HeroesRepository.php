@@ -6,4 +6,42 @@ final class HeroesRepository extends AbstractRepository
     {
         parent::__construct();
     }
+
+    public function createHero(Hero $hero): bool
+    {
+        $sql = "INSERT INTO hero (name, health, score) VALUES (:name, :health, :score)";
+        $stmt = $this->pdo->prepare($sql);
+
+        // Exécuter la requête avec les valeurs du héros
+        return $stmt->execute([
+            ':name' => $hero->getName(),
+            ':health' => $hero->getHealth(),
+            ':score' => $hero->getScore()
+        ]);
+    }
+    
+
+    public function getAllHeroesWithPositiveHealth(): array
+{
+   
+    $sql = "SELECT * FROM hero WHERE health > 0";
+    
+   
+    $stmt = $this->pdo->prepare($sql);
+    
+ 
+    $stmt->execute();
+    
+
+    $heroesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Créer un tableau d'objets Hero
+    $heroes = [];
+    foreach ($heroesData as $data) {
+        $heroes[] = new Hero( $data['name'], $data['health'], $data['score'],$data['id']);
+    }
+
+    return $heroes;
+}
+
 }
