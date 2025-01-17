@@ -33,6 +33,18 @@ class Monster
         return $this->health;
     }
 
+    public function attackHero(Hero $hero): void
+    {
+        $damage = max(0, $this->attackPower - $hero->getDefense()); // Calcul des dégâts infligés
+        $hero->takeDamage($damage); // Infliger les dégâts au héros
+        echo "{$this->name} attaque {$hero->getName()} et inflige $damage dégâts.\n";
+
+        if ($hero->getHealth() === 0) {
+            echo "{$this->name} a vaincu {$hero->getName()} !\n";
+        }
+    }
+
+
     public function takeDamage(int $damage): void
     {
         $this->health = max(0, $this->health - $damage);
@@ -56,4 +68,3 @@ class Monster
         return $this->level;
     }
 }
-

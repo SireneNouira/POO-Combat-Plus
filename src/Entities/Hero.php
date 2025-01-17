@@ -2,14 +2,14 @@
 
 class Hero
 {
-    private int $id; 
+    private int $id;
     private string $name;
     private int $health;
     private int $attackPower;
     private int $defense;
-    private int $score; 
+    private int $score;
 
-    
+
     public function __construct(string $name, int $health = 100, int $score = 0, int $id = 0)
     {
         $this->id = $id;      // Assurez-vous que l'ID est correctement assigné
@@ -22,6 +22,27 @@ class Hero
 
 
     // Méthodes
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setHealth(int $health): void
+    {
+        $this->health = $health;
+    }
+
+    public function setScore(int $score): void
+    {
+        $this->score = $score;
+    }
+
 
     public function getId(): int
     {
@@ -39,6 +60,12 @@ class Hero
         return $this->health;
     }
 
+    public function getAttackPower(): int
+    {
+        return $this->attackPower;
+    }
+
+
     public function attack(Monster $target): void
     {
         $damage = max(0, $this->attackPower - $target->getDefense());
@@ -50,7 +77,12 @@ class Hero
             $this->powerUp(); // Améliore les stats après une victoire
             echo "{$this->name} a vaincu {$target->getName()} et gagne en puissance !\n";
         }
+
+        // Mise à jour du héros dans la base de données après le combat
+        $heroesRepository = new HeroesRepository();
+        $heroesRepository->updateHero($this);
     }
+
 
     public function takeDamage(int $damage): void
     {

@@ -1,5 +1,6 @@
 
-<!-- 
+<?php
+
 class HeroMapper implements MapperContract
 {
     public static function mapToObject(array $datas): object
@@ -10,11 +11,15 @@ class HeroMapper implements MapperContract
         }
 
         // Crée un objet Hero à partir des données
-        $hero = new Hero($datas['name']);
-        $hero->setHealth($datas['health']);
-        $hero->setScore($datas['score']);
+        $hero = new Hero(
+            $datas['name'],
+            $datas['health'],
+            $datas['score'],
+         $datas['id'],
+        );
+        
 
         // Retourne l'objet Hero
         return $hero;
     }
-} --> 
+} 
