@@ -27,7 +27,7 @@ document.addEventListener('keydown', function(event) {
         attack();
     }
 });
-
+ 
   function heroAttack() {
     const heroImage = document.getElementById('heroImage');
     
@@ -42,22 +42,38 @@ document.addEventListener('keydown', function(event) {
 
 
 
+// function attack() {
+//   fetch('./fight.php', {
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/x-www-form-urlencoded'
+//       },
+//       body: 'action=attack',  
+      
+//   });
+// }
+
+
 function attack() {
+  console.log("fetch appelé");
+
+  // Créez les paramètres correctement encodés
+  const params = new URLSearchParams();
+  params.append('action', 'attack');
+
   fetch('fight.php', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: 'action=attack'  // L'action que vous voulez appeler sur le serveur
+      body: params.toString() // Convertir en chaîne de requête
   })
-  .then(response => response.json())
+  .then(response => response.text())
   .then(data => {
-      // Mettez à jour l'interface si nécessaire avec les nouvelles stats (PV, score, etc.)
-      console.log(data);
+      console.log(data);  // Affiche la réponse du serveur
   })
   .catch(error => console.error('Erreur lors de l\'attaque:', error));
 }
-
 
 
 

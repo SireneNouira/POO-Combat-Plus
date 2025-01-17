@@ -70,15 +70,24 @@ var_dump($_SESSION['hero']);
 var_dump($_SESSION['heroImage']);
 
 
+  
 
+var_dump($_POST);  // Débogue les données reçues
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] === 'attack') {
+        echo "Action 'attack' reçue !";
+        // Logique pour l'attaque
+    } else {
+        echo "Aucune action reçue.";
+    }
+} else {
+    echo "Requête non POST.";
+}
 
-if (isset($_POST['action']) && $_POST['action'] === 'attack') {
-    
-        $hero->attack($monster);  }
 ?>
 
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 
