@@ -133,6 +133,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="./assets/style.css">
     <script defer src="./script_fight.js"></script>
     <title>Fight</title>
+
+    <style>
+        body {
+    background-image: url('./assets/imgs/decors-jeu-combat-106.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+}
+ 
+    </style>
 </head>
 
 <body>
