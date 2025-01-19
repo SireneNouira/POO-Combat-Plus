@@ -18,14 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === " " || event.code === "Space") {
+  document.addEventListener('keydown', function(event) {
+    if ((event.key === " " || event.code === "Space") && !event.repeat) {
         heroAttack();
         attack();
-    }
+     }
 });
  
   function heroAttack() {
@@ -42,38 +39,21 @@ document.addEventListener('keydown', function(event) {
 
 
 
-// function attack() {
-//   fetch('./fight.php', {
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/x-www-form-urlencoded'
-//       },
-//       body: 'action=attack',  
-      
-//   });
-// }
 
 
-function attack() {
-  console.log("fetch appelé");
 
-  // Créez les paramètres correctement encodés
-  const params = new URLSearchParams();
-  params.append('action', 'attack');
+function attack(){
 
-  fetch('fight.php', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: params.toString() // Convertir en chaîne de requête
-  })
-  .then(response => response.text())
-  .then(data => {
-      console.log(data);  // Affiche la réponse du serveur
-  })
-  .catch(error => console.error('Erreur lors de l\'attaque:', error));
-}
+      // preventDefault();
+
+      // Simule un clic sur le bouton caché
+      const hiddenButton = document.getElementById('hiddenButton');
+      hiddenButton.click();
+  }
+
+
+
+
 
 
 

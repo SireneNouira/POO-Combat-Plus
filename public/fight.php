@@ -1,7 +1,6 @@
 <?php
 require_once '../utils/autoload.php';
 session_start();
-
 // if ($_SESSION['monstre']->getHealth() <= 10 && $_SESSION['mort']) {
 //     unset($_SESSION['monstre']);
 // }
@@ -70,19 +69,19 @@ var_dump($_SESSION['hero']);
 var_dump($_SESSION['heroImage']);
 
 
+
   
 
-var_dump($_POST);  // Débogue les données reçues
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && $_POST['action'] === 'attack') {
-        echo "Action 'attack' reçue !";
-        // Logique pour l'attaque
+    if (isset($_POST['attack'] )) {
+        // Action à exécuter lorsque le bouton "attack" est cliqué
+        echo "Action 'attack' reçue et traitée !";
+       $_SESSION['hero']->attack($monstre);
     } else {
-        echo "Aucune action reçue.";
+        echo "Action invalide ou non reçue.";
     }
 } else {
-    echo "Requête non POST.";
+    echo "Méthode non autorisée. Utilisez POST.";
 }
 
 ?>
@@ -95,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
-    <script defer src="assets/script_fight.js"></script>
+    <script defer src="./script_fight.js"></script>
     <title>Fight</title>
 </head>
 
@@ -106,6 +105,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <img src="" alt="Monstre Image" id="monsterImage" class="monstre-image" style="width: 200px; position: absolute; right: 400px;">
     </section>
 
+
+    <form id="hiddenForm" method="POST" action="fight.php">
+        <!-- Bouton caché -->
+        <button id="hiddenButton" type="submit" name="attack"  style="display: none;">Attack</button>
+    </form>
 </body>
 
 </html>
