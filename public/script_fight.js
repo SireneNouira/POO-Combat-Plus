@@ -21,10 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener('keydown', function(event) {
     if ((event.key === " " || event.code === "Space") && !event.repeat) {
         heroAttack();
-        attack();
+         attack();
      }
 });
  
+// bouge hero en appyant sur espace
   function heroAttack() {
     const heroImage = document.getElementById('heroImage');
     
@@ -38,20 +39,45 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 
-
-
-
-
+// simule click attack hero
 function attack(){
 
       // preventDefault();
 
-      // Simule un clic sur le bouton caché
       const hiddenButton = document.getElementById('hiddenButton');
       hiddenButton.click();
   }
 
 
+
+// function attack() {
+//   console.log("fetch appelé");
+
+//   // Créez les paramètres correctement encodés
+//   const params = new URLSearchParams();
+//   params.append('action', 'attack');
+
+//   fetch('./fight.php', {
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//       body: params.toString(),
+//   })
+//       .then(response => {
+//           console.log('Réponse reçue:', response);
+//           if (!response.ok) {
+//               throw new Error(`Erreur HTTP : ${response.status}`);
+//           }
+//           return response.text();
+//       })
+//       .then(data => {
+//           console.log('Données reçues du serveur :', data);
+//           location.reload(); // Recharge la page
+//           console.log('hhh');
+//       })
+//       .catch(error => console.error('Erreur lors de l\'attaque :', error));
+// }
 
 
 
@@ -75,3 +101,9 @@ function moveMonster() {
   
 setInterval(moveMonster, 2000); // Le monstre se déplace toutes les 2 secondes 
 
+
+// // simulation click sur button attackdu monstre
+// setInterval(() => {
+//   const monsterAttackButton = document.getElementById('monsterAttackButton');
+//   monsterAttackButton.click();
+// }, 2000); // 2000 ms = 2 secondes

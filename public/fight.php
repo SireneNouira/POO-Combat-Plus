@@ -1,6 +1,7 @@
 <?php
 require_once '../utils/autoload.php';
 session_start();
+// session_destroy();
 // if ($_SESSION['monstre']->getHealth() <= 10 && $_SESSION['mort']) {
 //     unset($_SESSION['monstre']);
 // }
@@ -69,21 +70,57 @@ var_dump($_SESSION['hero']);
 var_dump($_SESSION['heroImage']);
 
 
-
   
 
+var_dump($_POST);  
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     if (isset($_POST['action']) && $_POST['action'] === 'attack') {
+//         echo "Action 'attack' reçue !";
+//         $_SESSION['hero']->attack($_SESSION['monstre']);
+//     } else {
+//         echo "Aucune action reçue.";
+//     }
+// } else { 
+//     echo "Requête non POST.";
+// }
+
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     $action = $_POST['action'] ?? '';
+
+//     switch ($action) {
+//         case 'attack':
+//             $_SESSION['hero']->attack($_SESSION['monstre']);
+//             echo "Attack réalisée avec succès.";
+//             break;
+//         default:
+//             echo "Action non reconnue.";
+//             break;
+//     }
+// } else {
+//     echo "Méthode non supportée.";
+// }
+
+  
+//attack du hero
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['attack'] )) {
         // Action à exécuter lorsque le bouton "attack" est cliqué
         echo "Action 'attack' reçue et traitée !";
-       $_SESSION['hero']->attack($monstre);
-    } else {
-        echo "Action invalide ou non reçue.";
-    }
+       $_SESSION['hero']->attack($_SESSION['monstre']);
+    } 
 } else {
     echo "Méthode non autorisée. Utilisez POST.";
 }
 
+
+//attack du monstre
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['monstreattack'])) {
+        $_SESSION['monstre']->attackHero($_SESSION['hero']);
+    }
+}
 ?>
 
  
@@ -105,10 +142,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <img src="" alt="Monstre Image" id="monsterImage" class="monstre-image" style="width: 200px; position: absolute; right: 400px;">
     </section>
 
-
+<!-- button d'attack du hero -->
     <form id="hiddenForm" method="POST" action="fight.php">
         <!-- Bouton caché -->
         <button id="hiddenButton" type="submit" name="attack"  style="display: none;">Attack</button>
+    </form>
+
+<!-- button d'attack du monstre -->
+    <form id="monsterAttackForm" method="POST" action="fight.php">
+        <!-- Bouton caché -->
+        <button id="monsterAttackButton" type="submit" name="monstreattack" style="display: none;">Monster Attack</button>
     </form>
 </body>
 
