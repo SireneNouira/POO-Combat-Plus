@@ -1,15 +1,15 @@
 <?php
 require_once '../utils/autoload.php';
 session_start();
-// session_destroy();
-// if ($_SESSION['monstre']->getHealth() <= 10 && $_SESSION['mort']) {
+// session_destroy();// 
+// if ($_SESSION['monstre']->getHealth() <= 0 && $_SESSION['mort']) {
 //     unset($_SESSION['monstre']);
 // }
 
-// $_SESSION['mort'] = false; // quand le monstre sera vaicncu update par true
+$_SESSION['mort'] = false; // quand le monstre sera vaicncu update par true
 
 if (!isset($_SESSION['monstre'])) {
-    if(isset($_POST['hero_id'])){
+    if (isset($_POST['hero_id'])) {
         $creeMonstre = new FightsManager($_POST['hero_id']);
         $monstre = $creeMonstre->getMonster();
         echo $monstre->getName();
@@ -35,11 +35,11 @@ if (isset($_POST['select_hero']) && isset($_POST['hero_id']) && isset($_POST['he
 
     echo "Héros sélectionné : $heroId avec l'image : $heroImage <br>";
     $_SESSION['hero'] = $hero;
-   
-    
+
+
     if ($heroId) {
-       
-        
+
+
         // $_SESSION['monstre'] = [
         //     'name' => $monstre->getName(),
         //     'health' => $monstre->getHealth(),
@@ -60,19 +60,19 @@ $heros = $_SESSION['hero'];
  *  @var Monster $monstre
  */
 $heros = $_SESSION['hero'];
-$monstre =$_SESSION['monstre'];
+$monstre = $_SESSION['monstre'];
 /**
  *
  * @var Monster $_SESSION['monstre']
  */
-var_dump($_SESSION['monstre']);
-var_dump($_SESSION['hero']);
-var_dump($_SESSION['heroImage']);
+// var_dump($_SESSION['monstre']);
+// var_dump($_SESSION['hero']);
+// var_dump($_SESSION['heroImage']);
 
 
-  
 
-var_dump($_POST);  
+
+// var_dump($_POST);
 
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     if (isset($_POST['action']) && $_POST['action'] === 'attack') {
@@ -102,28 +102,49 @@ var_dump($_POST);
 //     echo "Méthode non supportée.";
 // }
 
-  
-//attack du hero
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['attack'] )) {
-        // Action à exécuter lorsque le bouton "attack" est cliqué
-        echo "Action 'attack' reçue et traitée !";
-       $_SESSION['hero']->attack($_SESSION['monstre']);
-    } 
-} else {
-    echo "Méthode non autorisée. Utilisez POST.";
-}
+
+// //attack du hero
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     if (isset($_POST['attack']) && $_SESSION['monstre']->getHealth() >= 0 && $_SESSION['hero']->getHealth() >= 0) {
+
+//        $_SESSION['hero']->attack($_SESSION['monstre']);
+
+//     } if ($_SESSION['monstre']->getHealth() <= 0) {
+//         echo "Le héros a vaincu le monstre !";
+//         session_destroy();
+//         unset($_SESSION['monstre']);
+//         //  header('Location: victory.php');
+//         exit();
+//     }
+// } else {
+//     echo "Méthode non autorisée. Utilisez POST.";
+// }
 
 
 //attack du monstre
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['monstreattack'])) {
+    if (isset($_POST['monstreattack']) && $_SESSION['monstre']->getHealth() >= 0 && $_SESSION['hero']->getHealth() >= 0) {
         $_SESSION['monstre']->attackHero($_SESSION['hero']);
+        // if ($_SESSION['hero']->getHealth() <= 0) {
+        //     echo "Le monstre a vaincu le héros !";
+        //     exit();
+        // }
+    }
+    if ($_SESSION['hero']->getHealth() <= 0) {
+        echo "Le monstre a vaincu le hero !";
+        session_destroy();
+        unset($_SESSION['monstre']);
+
+        exit();
     }
 }
+
+
+
 ?>
 
- 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,31 +155,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script defer src="./script_fight.js"></script>
     <title>Fight</title>
 
-    <style>
-        body {
-    background-image: url('./assets/imgs/decors-jeu-combat-106.gif');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-}
- 
-    </style>
+
 </head>
 
 <body>
 
+
+    <?php
+    //attack du hero
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['attack']) && $_SESSION['monstre']->getHealth() >= 0 && $_SESSION['hero']->getHealth() >= 0) {
+
+    ?>
+            <h1><?= $_SESSION['hero']->attack($_SESSION['monstre']); ?></h1>
+        <?php
+        }
+        if ($_SESSION['monstre']->getHealth() <= 0) {
+        ?>
+            <h1> <?= "Le héros a vaincu le monstre !" ?></h1>
+        <?php
+            session_destroy();
+            unset($_SESSION['monstre']);
+            ?>
+            <a href="home.php"><button>Re-jouer</button></a>
+         <?php
+            exit();
+        }
+    } else {
+        echo "Méthode non autorisée. Utilisez POST.";
+    }
+
+
+    //attack du monstre
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['monstreattack']) && $_SESSION['monstre']->getHealth() >= 0 && $_SESSION['hero']->getHealth() >= 0) {
+        ?>
+            <h1><?= $_SESSION['monstre']->attackHero($_SESSION['hero']); ?></h1>
+        <?php
+        }
+        if ($_SESSION['hero']->getHealth() <= 0) {
+        ?>
+            <h1>Le monstre a vaincu le hero !</h1>
+    <?php
+            session_destroy();
+            unset($_SESSION['monstre']);
+            ?>
+            <a href="home.php"><button>Re-jouer</button></a>
+         <?php
+            exit();
+        }
+    }
+
+    ?>
     <section style="display: flex; justify-content:center; gap: 20px;">
-        <img src="<?= $_SESSION['heroImage'] ?>" alt="Hero Image" id="heroImage" class="hero-image" style="width: 200px; position: absolute; left:       400px;">
-        <img src="" alt="Monstre Image" id="monsterImage" class="monstre-image" style="width: 200px; position: absolute; right: 400px;">
+        <img src="<?= $_SESSION['heroImage'] ?>" alt="Hero Image" id="heroImage" class="hero-image" style="width: 200px; position: absolute; left:700px;">
+        <img src="" alt="Monstre Image" id="monsterImage" class="monstre-image" style="width: 200px; position: absolute; right: 700px;">
     </section>
 
-<!-- button d'attack du hero -->
+    <!-- button d'attack du hero -->
     <form id="hiddenForm" method="POST" action="fight.php">
         <!-- Bouton caché -->
-        <button id="hiddenButton" type="submit" name="attack"  style="display: none;">Attack</button>
+        <button id="hiddenButton" type="submit" name="attack" style="display: none;">Attack</button>
     </form>
 
-<!-- button d'attack du monstre -->
+    <!-- button d'attack du monstre -->
     <form id="monsterAttackForm" method="POST" action="fight.php">
         <!-- Bouton caché -->
         <button id="monsterAttackButton" type="submit" name="monstreattack" style="display: none;">Monster Attack</button>

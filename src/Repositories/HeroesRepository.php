@@ -63,25 +63,6 @@ final class HeroesRepository extends AbstractRepository
     return HeroMapper::mapToObject($heroData);
 }
 
-// public function getHeroById(int $heroId): Hero
-// {
-//     $sql = "SELECT * FROM hero WHERE id = :id";
-//     $stmt = $this->pdo->prepare($sql);
-//     $stmt->execute(['id' => $heroId]);
-//     $heroData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-//     if ($heroData === false) {
-//         throw new Exception("Aucun héros trouvé avec l'ID $heroId");
-//     }
-
-//     // Crée et retourne un objet Hero à partir des données de la base de données
-//     return new Hero(
-//         $heroData['name'],
-//         $heroData['health'],
-//         $heroData['score'],
-//         $heroData['id']
-//     );
-// }
 
 public function updateHero(Hero $hero): bool
 {

@@ -10,7 +10,7 @@ class Monster
 
     public function __construct(int $heroScore)
     {
-        $this->level = max(1, intdiv($heroScore, 100)); // Niveau du monstre basé sur le score du héros
+        $this->level = max(1, intdiv($heroScore, 100));
         $this->name = $this->generateName();
         $this->health = rand(50, 100) + $this->level * 10;
         $this->defense = rand(5, 15) + $this->level;
@@ -35,11 +35,13 @@ class Monster
 
     public function attackHero(Hero $hero): void
     {
-        $damage = max(0, $this->attackPower - $hero->getDefense()); // Calcul des dégâts infligés
-        $hero->takeDamage($damage); // Infliger les dégâts au héros
+        $damage = max(0, $this->attackPower - $hero->getDefense());
+        $hero->takeDamage($damage); 
         echo "{$this->name} attaque {$hero->getName()} et inflige $damage dégâts.\n";
 
         if ($hero->getHealth() === 0) {
+           $heroRepo =  new HeroesRepository();
+           $heroRepo->updateHero($hero);
             echo "{$this->name} a vaincu {$hero->getName()} !\n";
         }
     }

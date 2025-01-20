@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Liste des images disponibles
   const images = [
     "assets/imgs/heroes/hero1.png",
-    "assets/imgs/heroes/hero1.png",
-    "assets/imgs/heroes/hero1.png",
+    "assets/imgs/heroes/hero3.png",
+    "assets/imgs/heroes/hero4.png",
+    "assets/imgs/heroes/hero5.png",
   ];
 
   // Sélection de toutes les cartes des héros

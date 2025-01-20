@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const images = [
       "assets/imgs/monstres/monstre1.png",
-      "assets/imgs/monstres/monstre1.png",
-      "assets/imgs/monstres/monstre1.png",
+      "assets/imgs/monstres/monstre2.png",
+      "assets/imgs/monstres/monstre3.png",
+      "assets/imgs/monstres/monstre4.png",
     ];
   
     // Sélection de l'élément img avec la classe monstre-image
@@ -102,8 +103,8 @@ function moveMonster() {
 setInterval(moveMonster, 2000); // Le monstre se déplace toutes les 2 secondes 
 
 
-// // simulation click sur button attackdu monstre
-// setInterval(() => {
-//   const monsterAttackButton = document.getElementById('monsterAttackButton');
-//   monsterAttackButton.click();
-// }, 2000); // 2000 ms = 2 secondes
+// simulation click sur button attackdu monstre
+setInterval(() => {
+  const monsterAttackButton = document.getElementById('monsterAttackButton');
+  monsterAttackButton.click();
+}, 1000); 

@@ -1,19 +1,101 @@
-/* body {
-    font-family: Arial, sans-serif;
+body {
+  font-family: "Press Start 2P", cursive;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-image: url("./imgs/fonds/decors-jeu-combat-106.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color:white;
 }
 .hero-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    width: 300px;
+  background: rgba(0, 0, 0, 0.8); 
+  border: 3px solid #e05301; 
+  border-radius: 10px; 
+  box-shadow: 0px 0px 20px 5px #ff4000; 
+  padding: 20px; 
+  margin: 15px; 
+  width: 300px; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
-.hero-card img {
-    width: 50px;
-    height: 50px;
-    margin-right: 20px;
+
+.hero-card:hover {
+  transform: scale(1.05); 
+  box-shadow: 0px 0px 30px 10px #ff5c33; 
 }
+
 .hero-info {
-    flex-grow: 1;
-} */
+  color: white; 
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.hero-card button {
+  font-family: "Press Start 2P", cursive;
+  font-size: 12px;
+  padding: 8px 15px;
+  border: 2px solid #ff4400;
+  border-radius: 5px;
+  color: white;
+  background: #333;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero-card button:hover {
+  background: #ff4d00;
+  color: black;
+  transform: scale(1.1);
+}
+
+#list-card {
+  display: flex;
+  justify-content: center;
+}
+h1 {
+  text-align: center;
+  color: orangered;
+}
+header {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column;
+}
+
+header form {
+  display: flex;
+  flex-direction: column; 
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.8); 
+  padding: 20px;
+  border: 3px solid #e05301; 
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 5px #ff4000; 
+  width: 300px; 
+}
+
+header form input,
+header form button {
+  font-family: "Press Start 2P", cursive;
+  font-size: 14px;
+  padding: 10px;
+  border: 2px solid #ff4400;
+  border-radius: 5px;
+  color: white;
+  background: #333; 
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+header form button:hover {
+  background-color: #ff4d00;
+  color: black;
+  transform: scale(1.1); 
+  cursor: pointer;
+}
