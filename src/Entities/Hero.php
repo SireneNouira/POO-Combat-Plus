@@ -10,13 +10,13 @@ class Hero
     private int $score;
 
 
-    public function __construct(string $name, int $health = 100, int $score = 0, int $id = 0)
+    public function __construct(string $name, int $health = 200, int $score = 0, int $id = 0)
     {
         $this->id = $id;      // Assurez-vous que l'ID est correctement assigné
         $this->name = $name;
         $this->health = $health;
-        $this->attackPower = 20;
-        $this->defense = 5;
+        $this->attackPower = 25;
+        $this->defense = 10;
         $this->score = $score;
     }
 
@@ -70,11 +70,11 @@ class Hero
     {
         $damage = max(0, $this->attackPower - $target->getDefense());
         $target->takeDamage($damage);
-        echo "{$this->name} attaque {$target->getName()} et inflige $damage dégâts.\n";
-
+        echo "{$this->name} attaque {$target->getName()} inflige $damage dégâts.<br>";
+        echo "{$target->getName()} {$target->getHealth()} HP";
         if ($target->getHealth() === 0) {
             $this->incrementScore($target->getLevel());
-            $this->powerUp(); // Améliore les stats après une victoire
+            $this->powerUp();
             echo "{$this->name} a vaincu {$target->getName()} et gagne en puissance !\n";
         }
 

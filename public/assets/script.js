@@ -30,20 +30,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     const images = [
-//       "assets/imgs/monstres/monstre1.png",
-//       "assets/imgs/monstres/monstre1.png",
-//       "assets/imgs/monstres/monstre1.png",
-//     ];
-  
-//     // Sélection de l'élément img avec la classe monstre-image
-//     const monstreImage = document.querySelector(".monstre-image");
-  
-//     if (monstreImage) {
-//       // Attribution d'une image aléatoire
-//       const randomImage = images[Math.floor(Math.random() * images.length)];
-//       monstreImage.src = randomImage;
-//     }
-//   });
-  

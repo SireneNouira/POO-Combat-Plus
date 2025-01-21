@@ -12,9 +12,9 @@ class Monster
     {
         $this->level = max(1, intdiv($heroScore, 100));
         $this->name = $this->generateName();
-        $this->health = rand(50, 100) + $this->level * 10;
-        $this->defense = rand(5, 15) + $this->level;
-        $this->attackPower = rand(10, 20) + $this->level * 2;
+        $this->health = rand(50, 200) + $this->level * 20;
+        $this->defense = rand(10, 20) + $this->level;
+        $this->attackPower = rand(20, 30) + $this->level * 2;
     }
 
     private function generateName(): string
@@ -37,8 +37,8 @@ class Monster
     {
         $damage = max(0, $this->attackPower - $hero->getDefense());
         $hero->takeDamage($damage); 
-        echo "{$this->name} attaque {$hero->getName()} et inflige $damage dégâts.\n";
-
+        echo "{$this->name} attaque {$hero->getName()} et inflige $damage dégâts.<br>";
+        echo "{$hero->getName()} {$hero->getHealth()} HP";
         if ($hero->getHealth() === 0) {
            $heroRepo =  new HeroesRepository();
            $heroRepo->updateHero($hero);

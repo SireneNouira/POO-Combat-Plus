@@ -1,18 +1,12 @@
 <?php
 require_once '../utils/autoload.php';
 session_start();
-// session_destroy();// 
-// if ($_SESSION['monstre']->getHealth() <= 0 && $_SESSION['mort']) {
-//     unset($_SESSION['monstre']);
-// }
-
-$_SESSION['mort'] = false; // quand le monstre sera vaicncu update par true
 
 if (!isset($_SESSION['monstre'])) {
     if (isset($_POST['hero_id'])) {
         $creeMonstre = new FightsManager($_POST['hero_id']);
         $monstre = $creeMonstre->getMonster();
-        echo $monstre->getName();
+        // echo $monstre->getName();
         $_SESSION['monstre'] = $monstre;
     }
 }
@@ -33,23 +27,11 @@ if (isset($_POST['select_hero']) && isset($_POST['hero_id']) && isset($_POST['he
     $hero = $heroRepository->getHeroById($heroId);
 
 
-    echo "Héros sélectionné : $heroId avec l'image : $heroImage <br>";
+    // echo "Héros sélectionné : $heroId avec l'image : $heroImage <br>";
     $_SESSION['hero'] = $hero;
 
 
-    if ($heroId) {
-
-
-        // $_SESSION['monstre'] = [
-        //     'name' => $monstre->getName(),
-        //     'health' => $monstre->getHealth(),
-        //     'defense' => $monstre->getDefense(),
-        //     'attackPower' => $monstre->getAttackPower(),
-        //     'level' => $monstre->getLevel(),
-        // ];
-        // echo " Monstre crée !";
-    }
-    // header('Location: fight.php');
+    
 }
 
 /**
@@ -125,10 +107,6 @@ $monstre = $_SESSION['monstre'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['monstreattack']) && $_SESSION['monstre']->getHealth() >= 0 && $_SESSION['hero']->getHealth() >= 0) {
         $_SESSION['monstre']->attackHero($_SESSION['hero']);
-        // if ($_SESSION['hero']->getHealth() <= 0) {
-        //     echo "Le monstre a vaincu le héros !";
-        //     exit();
-        // }
     }
     if ($_SESSION['hero']->getHealth() <= 0) {
         echo "Le monstre a vaincu le hero !";
@@ -152,7 +130,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
-    <script defer src="./script_fight.js"></script>
+
+    <script defer src="./assets/script_fight.js"></script>
+
     <title>Fight</title>
 
 
@@ -167,17 +147,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['attack']) && $_SESSION['monstre']->getHealth() >= 0 && $_SESSION['hero']->getHealth() >= 0) {
 
     ?>
-            <h1><?= $_SESSION['hero']->attack($_SESSION['monstre']); ?></h1>
+            <h1 class="comments"><?= $_SESSION['hero']->attack($_SESSION['monstre']); ?></h1>
         <?php
         }
         if ($_SESSION['monstre']->getHealth() <= 0) {
         ?>
-            <h1> <?= "Le héros a vaincu le monstre !" ?></h1>
+           
         <?php
             session_destroy();
             unset($_SESSION['monstre']);
             ?>
-            <a href="home.php"><button>Re-jouer</button></a>
+             <a href="home.php"><button class="replay" >Re-jouer</button></a>
          <?php
             exit();
         }
@@ -190,17 +170,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['monstreattack']) && $_SESSION['monstre']->getHealth() >= 0 && $_SESSION['hero']->getHealth() >= 0) {
         ?>
-            <h1><?= $_SESSION['monstre']->attackHero($_SESSION['hero']); ?></h1>
+            <h1 class="comments"><?= $_SESSION['monstre']->attackHero($_SESSION['hero']); ?></h1>
         <?php
         }
         if ($_SESSION['hero']->getHealth() <= 0) {
         ?>
-            <h1>Le monstre a vaincu le hero !</h1>
+        
     <?php
             session_destroy();
             unset($_SESSION['monstre']);
             ?>
-            <a href="home.php"><button>Re-jouer</button></a>
+            <a href="home.php"><button class="replay">Re-jouer</button></a>
          <?php
             exit();
         }
