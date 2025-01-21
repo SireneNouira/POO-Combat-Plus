@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       moveMonster(); // Déplacer l'image immédiatement
       setInterval(moveMonster, 2000); // Déplacer l'image toutes les 2 secondes
       // Attaquer toutes les 4 secondes
-      setInterval(attackMonster, 2000);
+      setInterval(attackMonster, 1000);
     
     };
   }
