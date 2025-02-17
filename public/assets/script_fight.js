@@ -19,16 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
     monstreImage.src = savedImage;
      // Démarrer l'animation une fois l'image chargée
      monstreImage.onload = function () {
-      moveMonster(); // Déplacer l'image immédiatement
-      setInterval(moveMonster, 2000); // Déplacer l'image toutes les 2 secondes
+      moveMonster(); 
+      setInterval(moveMonster, 2000); 
+
       // Attaquer toutes les 4 secondes
       setInterval(attackMonster, 1000);
-    
     };
   }
 });
 
-const replays = document.querySelectorAll('.replay'); // Sélectionne tous les éléments avec la classe 'replay'
+const replays = document.querySelectorAll('.replay'); 
 
 replays.forEach(replay => {
   replay.addEventListener('click', removeItem);
@@ -50,12 +50,10 @@ document.addEventListener("keydown", function (event) {
 function heroAttack() {
   const heroImage = document.getElementById("heroImage");
 
-  heroImage.style.transform = "translateX(100px)"; // Déplace le héros de 100px vers la droite
-
-  // Attendre quelques secondes puis revenir à sa position initiale
+  heroImage.style.transform = "translateX(100px)"; 
   setTimeout(() => {
     heroImage.style.transform = "translateX(0)";
-  }, 500); // 500ms pour que l'attaque soit visible
+  }, 500); 
 }
 
 // simule click attack hero

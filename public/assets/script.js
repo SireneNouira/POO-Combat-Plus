@@ -35,24 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const selectedImageInput = document.getElementById("selected-image");
   const avatarOptions = document.querySelectorAll(".avatar-option");
 
-  // Ouvrir la modal
+
   chooseAvatarBtn.addEventListener("click", function () {
-      modal.style.display = "flex"; // Afficher la modal en flex pour centrer le contenu
+      modal.style.display = "flex"; 
   });
 
-  // Fermer la modal
   closeModalBtn.addEventListener("click", function () {
       modal.style.display = "none";
   });
 
-  // Sélectionner une image
   avatarOptions.forEach(function (avatar) {
       avatar.addEventListener("click", function () {
           const selectedImage = avatar.getAttribute("data-src");
           selectedImageInput.value = selectedImage;
           modal.style.display = "none";
 
-          // Sauvegarder l'image dans le localStorage avec le nom du héros comme clé
           const heroName = document.getElementById("name").value;
           if (heroName) {
               localStorage.setItem(`hero-image-${heroName}`, selectedImage);

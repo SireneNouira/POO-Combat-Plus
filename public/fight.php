@@ -29,9 +29,6 @@ if (isset($_POST['select_hero']) && isset($_POST['hero_id']) && isset($_POST['he
 
     // echo "Héros sélectionné : $heroId avec l'image : $heroImage <br>";
     $_SESSION['hero'] = $hero;
-
-
-    
 }
 
 /**
@@ -152,13 +149,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if ($_SESSION['monstre']->getHealth() <= 0) {
         ?>
-           
-        <?php
+
+            <?php
             session_destroy();
             unset($_SESSION['monstre']);
             ?>
-             <a href="home.php"><button class="replay" >Re-jouer</button></a>
-         <?php
+            <a href="home.php"><button class="replay">Re-jouer</button></a>
+        <?php
             exit();
         }
     } else {
@@ -175,13 +172,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if ($_SESSION['hero']->getHealth() <= 0) {
         ?>
-        
-    <?php
+
+            <?php
             session_destroy();
             unset($_SESSION['monstre']);
             ?>
             <a href="home.php"><button class="replay">Re-jouer</button></a>
-         <?php
+    <?php
             exit();
         }
     }
@@ -190,6 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section style="display: flex; justify-content:center; gap: 20px;">
         <img src="<?= $_SESSION['heroImage'] ?>" alt="Hero Image" id="heroImage" class="hero-image" style="width: 200px; position: absolute; left:700px;">
         <img src="" alt="Monstre Image" id="monsterImage" class="monstre-image" style="width: 200px; position: absolute; right: 700px;">
+        <h3 class="consigne">Appuyez sur espace pour combattre !</h3>
     </section>
 
     <!-- button d'attack du hero -->
@@ -200,9 +198,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- button d'attack du monstre -->
     <form id="monsterAttackForm" method="POST" action="fight.php">
-        <!-- Bouton caché -->
         <button id="monsterAttackButton" type="submit" name="monstreattack" style="display: none;">Monster Attack</button>
     </form>
+ 
 </body>
 
 </html>
